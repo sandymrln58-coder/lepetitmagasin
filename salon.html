@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon - Inspirations | le petit magasin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-charcoal: #5a5a5a;
+            --color-lime: #a8c83e;
+            --color-light: #f8f8f6;
+            --color-white: #ffffff;
+            --color-dark: #1a1a1a;
+            --color-accent: #d4e4bc;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-white);
+            background: var(--color-dark);
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 769px) {
+            body { cursor: none; }
+            .cursor {
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 2px solid var(--color-lime);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                transition: transform 0.15s ease;
+                mix-blend-mode: difference;
+            }
+            .cursor-follower {
+                position: fixed;
+                width: 8px;
+                height: 8px;
+                background: var(--color-lime);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                transition: transform 0.05s ease;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower { display: none !important; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(168, 200, 62, 0.1);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--color-lime);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--color-lime);
+        }
+
+        .hero-page {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #2a2a2a 0%, var(--color-dark) 100%);
+            position: relative;
+            margin-top: 100px;
+        }
+
+        .hero-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(168, 200, 62, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-style: italic;
+            color: var(--color-lime);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .inspiration-section {
+            padding: 8rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-intro h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--color-lime);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .example-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(168, 200, 62, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-lime);
+            box-shadow: 0 20px 40px rgba(168, 200, 62, 0.2);
+        }
+
+        .example-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .example-content {
+            padding: 2rem;
+        }
+
+        .example-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+
+        .example-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .example-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .example-features li {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .example-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-lime);
+        }
+
+        footer {
+            padding: 4rem 5%;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(168, 200, 62, 0.1);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--color-lime);
+        }
+
+        .footer-info {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-title {
+                font-size: 3rem;
+            }
+            .inspiration-section {
+                padding: 4rem 5%;
+            }
+            nav {
+                padding: 1.5rem 5%;
+            }
+            .nav-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">le petit magasin</a>
+        <a href="index.html#gallery" class="back-link">← Retour</a>
+    </nav>
+
+    <section class="hero-page">
+        <div class="hero-content">
+            <h1 class="page-title">Salon</h1>
+            <p class="page-subtitle">Espaces de vie contemporains</p>
+        </div>
+    </section>
+
+    <section class="inspiration-section">
+        <div class="section-intro">
+            <h2>Nos inspirations salon</h2>
+            <p>Découvrez une sélection d'ambiances salon alliant confort, esthétique et fonctionnalité. Du minimalisme épuré au design maximaliste, trouvez l'inspiration pour créer votre espace idéal.</p>
+        </div>
+
+        <div class="examples-grid">
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80" alt="Salon moderne minimaliste" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Minimalisme Contemporain</h3>
+                    <p class="example-description">Un espace épuré où chaque élément a sa place. Les lignes pures et les matériaux nobles créent une atmosphère apaisante.</p>
+                    <ul class="example-features">
+                        <li>Canapé Togo - Ligne Roset</li>
+                        <li>Luminaire Arco - Flos</li>
+                        <li>Table basse design - Kartell</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=800&q=80" alt="Salon chaleureux" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Chaleur Scandinave</h3>
+                    <p class="example-description">L'alliance parfaite entre fonctionnalité et confort. Des tons naturels et des textures douces pour un cocon accueillant.</p>
+                    <ul class="example-features">
+                        <li>Fauteuils Eames - Vitra</li>
+                        <li>Suspension Foscarini</li>
+                        <li>Tapis contemporain</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80" alt="Salon luxueux" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Élégance Urbaine</h3>
+                    <p class="example-description">Un salon sophistiqué aux touches raffinées. Les matériaux nobles et les couleurs profondes créent une ambiance chic.</p>
+                    <ul class="example-features">
+                        <li>Canapé modulaire - Cassina</li>
+                        <li>Éclairage Artemide</li>
+                        <li>Accessoires Alessi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=800&q=80" alt="Salon coloré" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Éclat Coloré</h3>
+                    <p class="example-description">Osez la couleur pour un salon vibrant et joyeux. Les pièces design apportent personnalité et dynamisme à l'espace.</p>
+                    <ul class="example-features">
+                        <li>Mobilier Kartell coloré</li>
+                        <li>Luminaires Ingo Maurer</li>
+                        <li>Objets déco Memphis Milano</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&q=80" alt="Salon industriel" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Esprit Industriel</h3>
+                    <p class="example-description">L'alliance du brut et du raffiné. Des matériaux authentiques rencontrent le design contemporain pour un résultat unique.</p>
+                    <ul class="example-features">
+                        <li>Mobilier Tolix</li>
+                        <li>Éclairage Fontana Arte</li>
+                        <li>Chaises Fermob</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80" alt="Salon zen" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Sérénité Zen</h3>
+                    <p class="example-description">Un havre de paix aux lignes épurées. La simplicité et l'harmonie au service de votre bien-être quotidien.</p>
+                    <ul class="example-features">
+                        <li>Mobilier Magis</li>
+                        <li>Luminaires Belux</li>
+                        <li>Textiles Marimekko</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">le petit magasin</div>
+            <div class="footer-info">
+                &copy; 2026 le petit magasin - Tous droits réservés
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+
+            if (cursor && cursorFollower) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+                    cursorFollower.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+                });
+
+                document.querySelectorAll('a, button').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform += ' scale(1.5)';
+                        cursor.style.borderColor = 'var(--color-white)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+                        cursor.style.borderColor = 'var(--color-lime)';
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

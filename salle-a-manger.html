@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salle à manger - Inspirations | le petit magasin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-charcoal: #5a5a5a;
+            --color-lime: #a8c83e;
+            --color-white: #ffffff;
+            --color-dark: #1a1a1a;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); color: var(--color-white); background: var(--color-dark); overflow-x: hidden; }
+        @media (min-width: 769px) {
+            body { cursor: none; }
+            .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--color-lime); border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 0.15s ease; mix-blend-mode: difference; }
+            .cursor-follower { position: fixed; width: 8px; height: 8px; background: var(--color-lime); border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 0.05s ease; }
+        }
+        @media (max-width: 768px) { .cursor, .cursor-follower { display: none !important; } }
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168, 200, 62, 0.1); }
+        .nav-logo { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-lime); text-decoration: none; }
+        .back-link { color: var(--color-white); text-decoration: none; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--color-lime); }
+        .hero-page { height: 60vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #2a2a2a 0%, var(--color-dark) 100%); position: relative; margin-top: 100px; }
+        .hero-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(168, 200, 62, 0.1) 0%, transparent 70%); }
+        .hero-content { text-align: center; position: relative; z-index: 2; }
+        .page-title { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 8rem); font-style: italic; color: var(--color-lime); margin-bottom: 1rem; }
+        .page-subtitle { font-size: 1.2rem; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.1em; text-transform: uppercase; }
+        .inspiration-section { padding: 8rem 5%; max-width: 1600px; margin: 0 auto; }
+        .section-intro { text-align: center; max-width: 800px; margin: 0 auto 5rem; }
+        .section-intro h2 { font-family: var(--font-display); font-size: 2.5rem; font-style: italic; color: var(--color-lime); margin-bottom: 1rem; }
+        .section-intro p { font-size: 1.1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.8); }
+        .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem; }
+        .example-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(168, 200, 62, 0.1); border-radius: 20px; overflow: hidden; transition: all 0.4s ease; }
+        .example-card:hover { transform: translateY(-10px); border-color: var(--color-lime); box-shadow: 0 20px 40px rgba(168, 200, 62, 0.2); }
+        .example-image { width: 100%; height: 400px; object-fit: cover; background: rgba(255, 255, 255, 0.05); }
+        .example-content { padding: 2rem; }
+        .example-title { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-white); margin-bottom: 1rem; }
+        .example-description { color: rgba(255, 255, 255, 0.7); line-height: 1.8; margin-bottom: 1.5rem; }
+        .example-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .example-features li { color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; padding-left: 1.5rem; position: relative; }
+        .example-features li::before { content: '→'; position: absolute; left: 0; color: var(--color-lime); }
+        footer { padding: 4rem 5%; background: #0a0a0a; border-top: 1px solid rgba(168, 200, 62, 0.1); text-align: center; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-logo { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-lime); }
+        .footer-info { color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            .examples-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 3rem; }
+            .inspiration-section { padding: 4rem 5%; }
+            nav { padding: 1.5rem 5%; }
+            .nav-logo { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <nav>
+        <a href="index.html" class="nav-logo">le petit magasin</a>
+        <a href="index.html#gallery" class="back-link">← Retour</a>
+    </nav>
+    <section class="hero-page">
+        <div class="hero-content">
+            <h1 class="page-title">Salle à manger</h1>
+            <p class="page-subtitle">L'art de recevoir</p>
+        </div>
+    </section>
+    <section class="inspiration-section">
+        <div class="section-intro">
+            <h2>Nos inspirations salle à manger</h2>
+            <p>Créez un espace convivial où chaque repas devient un moment privilégié. Tables, chaises et luminaires design pour sublimer vos moments de partage.</p>
+        </div>
+        <div class="examples-grid">
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80" alt="Salle à manger moderne" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Table Conviviale</h3>
+                    <p class="example-description">Une grande table design pour rassembler famille et amis. L'éclairage suspendu crée une ambiance chaleureuse.</p>
+                    <ul class="example-features">
+                        <li>Table extensible - Ligne Roset</li>
+                        <li>Chaises Eames - Vitra</li>
+                        <li>Suspension Tolomeo - Artemide</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80" alt="Salle à manger design" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Élégance Nordique</h3>
+                    <p class="example-description">Des lignes épurées et des matériaux naturels pour un espace lumineux et accueillant.</p>
+                    <ul class="example-features">
+                        <li>Table en bois - Ligne Roset</li>
+                        <li>Chaises design - Kartell</li>
+                        <li>Luminaire suspendu - Foscarini</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80" alt="Salle à manger contemporaine" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Modernité Raffinée</h3>
+                    <p class="example-description">Le mariage parfait entre design contemporain et confort. Chaque détail compte.</p>
+                    <ul class="example-features">
+                        <li>Table Knoll</li>
+                        <li>Chaises design - Magis</li>
+                        <li>Éclairage architectural - Flos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1565182999561-18d7dc61c393?w=800&q=80" alt="Salle à manger chic" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Charme Industriel</h3>
+                    <p class="example-description">L'alliance de matériaux bruts et de pièces design pour un style unique et authentique.</p>
+                    <ul class="example-features">
+                        <li>Table métal et bois - Tolix</li>
+                        <li>Chaises industrielles - Tolix</li>
+                        <li>Suspension vintage - Fontana Arte</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Salle à manger colorée" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Couleurs Vibrantes</h3>
+                    <p class="example-description">Des chaises colorées autour d'une table design pour un espace plein de vie et de personnalité.</p>
+                    <ul class="example-features">
+                        <li>Table blanche - Kartell</li>
+                        <li>Chaises multicolores - Kartell</li>
+                        <li>Luminaire graphique - Ingo Maurer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="Salle à manger luxueuse" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Luxe Contemporain</h3>
+                    <p class="example-description">Des matériaux nobles et un design sophistiqué pour des repas d'exception.</p>
+                    <ul class="example-features">
+                        <li>Table marbre - Cassina</li>
+                        <li>Chaises cuir - Vitra</li>
+                        <li>Suspension design - Artemide</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">le petit magasin</div>
+            <div class="footer-info">&copy; 2026 le petit magasin - Tous droits réservés</div>
+        </div>
+    </footer>
+    <script>
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            if (cursor && cursorFollower) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+                    cursorFollower.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+                });
+                document.querySelectorAll('a, button').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform += ' scale(1.5)';
+                        cursor.style.borderColor = 'var(--color-white)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+                        cursor.style.borderColor = 'var(--color-lime)';
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

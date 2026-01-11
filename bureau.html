@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bureau - Inspirations | le petit magasin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-charcoal: #5a5a5a;
+            --color-lime: #a8c83e;
+            --color-white: #ffffff;
+            --color-dark: #1a1a1a;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); color: var(--color-white); background: var(--color-dark); overflow-x: hidden; }
+        @media (min-width: 769px) {
+            body { cursor: none; }
+            .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--color-lime); border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 0.15s ease; mix-blend-mode: difference; }
+            .cursor-follower { position: fixed; width: 8px; height: 8px; background: var(--color-lime); border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 0.05s ease; }
+        }
+        @media (max-width: 768px) { .cursor, .cursor-follower { display: none !important; } }
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(168, 200, 62, 0.1); }
+        .nav-logo { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-lime); text-decoration: none; }
+        .back-link { color: var(--color-white); text-decoration: none; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--color-lime); }
+        .hero-page { height: 60vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #2a2a2a 0%, var(--color-dark) 100%); position: relative; margin-top: 100px; }
+        .hero-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(168, 200, 62, 0.1) 0%, transparent 70%); }
+        .hero-content { text-align: center; position: relative; z-index: 2; }
+        .page-title { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 8rem); font-style: italic; color: var(--color-lime); margin-bottom: 1rem; }
+        .page-subtitle { font-size: 1.2rem; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.1em; text-transform: uppercase; }
+        .inspiration-section { padding: 8rem 5%; max-width: 1600px; margin: 0 auto; }
+        .section-intro { text-align: center; max-width: 800px; margin: 0 auto 5rem; }
+        .section-intro h2 { font-family: var(--font-display); font-size: 2.5rem; font-style: italic; color: var(--color-lime); margin-bottom: 1rem; }
+        .section-intro p { font-size: 1.1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.8); }
+        .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem; }
+        .example-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(168, 200, 62, 0.1); border-radius: 20px; overflow: hidden; transition: all 0.4s ease; }
+        .example-card:hover { transform: translateY(-10px); border-color: var(--color-lime); box-shadow: 0 20px 40px rgba(168, 200, 62, 0.2); }
+        .example-image { width: 100%; height: 400px; object-fit: cover; background: rgba(255, 255, 255, 0.05); }
+        .example-content { padding: 2rem; }
+        .example-title { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-white); margin-bottom: 1rem; }
+        .example-description { color: rgba(255, 255, 255, 0.7); line-height: 1.8; margin-bottom: 1.5rem; }
+        .example-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .example-features li { color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; padding-left: 1.5rem; position: relative; }
+        .example-features li::before { content: '→'; position: absolute; left: 0; color: var(--color-lime); }
+        footer { padding: 4rem 5%; background: #0a0a0a; border-top: 1px solid rgba(168, 200, 62, 0.1); text-align: center; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-logo { font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-lime); }
+        .footer-info { color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            .examples-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 3rem; }
+            .inspiration-section { padding: 4rem 5%; }
+            nav { padding: 1.5rem 5%; }
+            .nav-logo { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <nav>
+        <a href="index.html" class="nav-logo">le petit magasin</a>
+        <a href="index.html#gallery" class="back-link">← Retour</a>
+    </nav>
+    <section class="hero-page">
+        <div class="hero-content">
+            <h1 class="page-title">Bureau</h1>
+            <p class="page-subtitle">Espaces de travail inspirants</p>
+        </div>
+    </section>
+    <section class="inspiration-section">
+        <div class="section-intro">
+            <h2>Nos inspirations bureau</h2>
+            <p>Créez un espace de travail stimulant et ergonomique. Mobilier design et éclairage adapté pour booster votre productivité et votre créativité.</p>
+        </div>
+        <div class="examples-grid">
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" alt="Bureau moderne minimaliste" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Focus Minimaliste</h3>
+                    <p class="example-description">Un bureau épuré pour favoriser la concentration. L'essentiel à portée de main, rien de superflu.</p>
+                    <ul class="example-features">
+                        <li>Bureau design - Ligne Roset</li>
+                        <li>Chaise ergonomique - Vitra</li>
+                        <li>Lampe Tolomeo - Artemide</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Bureau contemporain" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Open Space Design</h3>
+                    <p class="example-description">Un aménagement moderne pour un espace de travail collaboratif et dynamique.</p>
+                    <ul class="example-features">
+                        <li>Bureaux modulaires - Knoll</li>
+                        <li>Chaises design - Magis</li>
+                        <li>Éclairage architectural - Flos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Bureau exécutif" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Élégance Executive</h3>
+                    <p class="example-description">Un bureau de direction au style raffiné. Prestige et fonctionnalité se rencontrent.</p>
+                    <ul class="example-features">
+                        <li>Bureau direction - Cassina</li>
+                        <li>Fauteuil cuir - Vitra</li>
+                        <li>Luminaire design - Fontana Arte</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80" alt="Bureau créatif" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Atelier Créatif</h3>
+                    <p class="example-description">Un espace inspirant pour laisser libre cours à votre créativité. Couleur et design stimulent l'innovation.</p>
+                    <ul class="example-features">
+                        <li>Bureau coloré - Kartell</li>
+                        <li>Chaise design - Kartell</li>
+                        <li>Éclairage créatif - Ingo Maurer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" alt="Bureau tech" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Station Tech</h3>
+                    <p class="example-description">Un setup moderne pour les professionnels du digital. Ergonomie et technologie au service de la performance.</p>
+                    <ul class="example-features">
+                        <li>Bureau ajustable - Ligne Roset</li>
+                        <li>Fauteuil ergonomique - Vitra</li>
+                        <li>Lampe LED - Artemide</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80" alt="Bureau cosy" class="example-image" crossorigin="anonymous">
+                <div class="example-content">
+                    <h3 class="example-title">Confort Home Office</h3>
+                    <p class="example-description">Travaillez depuis chez vous dans un cadre chaleureux et professionnel. Le meilleur des deux mondes.</p>
+                    <ul class="example-features">
+                        <li>Bureau compact - Magis</li>
+                        <li>Chaise confort - Vitra</li>
+                        <li>Éclairage d'ambiance - Foscarini</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">le petit magasin</div>
+            <div class="footer-info">&copy; 2026 le petit magasin - Tous droits réservés</div>
+        </div>
+    </footer>
+    <script>
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            if (cursor && cursorFollower) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+                    cursorFollower.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+                });
+                document.querySelectorAll('a, button').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform += ' scale(1.5)';
+                        cursor.style.borderColor = 'var(--color-white)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+                        cursor.style.borderColor = 'var(--color-lime)';
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>
